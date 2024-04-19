@@ -1,6 +1,37 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { ref, watch } from 'vue'
+import { RouterLink, RouterView, route } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
+let transitionName = ref('none')
+let isGoingBack = false
+
+
+window.addEventListener('popstate', () => {
+  isGoingBack = true
+})
+
+
+
+watch(
+  () => route.name,
+  (to, from) => {
+    console.log("watch");
+    transitionName.value = "none";
+    if (isGoingBack) {
+      // 뒤로 가기 버튼 눌렸을 시 왼쪽에서 덮임
+      transitionName.value = "slide-left";
+      isGoingBack = false;
+    } else {
+      if (from === undefined) return; // 새로고침시
+      transitionName.value = "slide-right";
+    }
+  }
+)
+
+watch
+
+
 </script>
 
 <template>
@@ -17,8 +48,14 @@ import HelloWorld from './components/HelloWorld.vue'
       </nav>
     </div>
   </header>
+  //transition routerView
 
-  <RouterView />
+  <RouterView v-slot="{ Component }">
+    <transition :name="transitionName">
+      <component :is="Component" />
+    </transition>
+  </RouterView>
+
 </template>
 
 <style scoped>

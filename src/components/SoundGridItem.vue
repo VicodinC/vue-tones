@@ -13,9 +13,12 @@ const props = defineProps({
   item: Object
 })
 
+
+//modal open
 let openInstrumentModal = () => {
   console.log('openInstrumentModal')
-
+  //open modal
+  InstrumentModal.open = true;
 }
 
 //set class for grid item
