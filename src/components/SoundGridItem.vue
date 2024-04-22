@@ -1,7 +1,10 @@
 <template>
   <!-- grid flex item -->
-  <div :class="gridItemClass" @click="openInstrumentModal">
-  </div>
+  <RouterLink to="/instrument/1">
+    <div :class="gridItemClass" @click="openInstrumentModal">
+
+    </div>
+  </RouterLink>
 </template>
 
 <script setup>
@@ -14,11 +17,11 @@ const props = defineProps({
 })
 
 
-//modal open
-let openInstrumentModal = () => {
+//open Instrument Modal when grid item is
+let openInstrument = () => {
   console.log('openInstrumentModal')
-  //open modal
-  InstrumentModal.open = true;
+  //open Instrument Modal
+  route.push({ name: 'Instrument' })
 }
 
 //set class for grid item

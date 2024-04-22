@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/AboutView.vue'
+import InstrumentModal from '../components/InstrumentModal.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,9 +21,15 @@ const router = createRouter({
     },
     {
       path: '/sound-grid',
-      name: 'sound-grid',
+      name: 'soundGrid',
       component: () => import('../views/SoundGridView.vue')
+    },
+    {
+      path: '/instrument/:id',
+      name: 'instrument',
+      component: InstrumentModal
     }
+    
   ]
 })
 
