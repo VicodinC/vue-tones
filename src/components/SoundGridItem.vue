@@ -8,17 +8,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { defineProps } from 'vue'
+import { ref, defineProps } from 'vue'
+import { useRoute } from 'vue-router'
 import InstrumentModal from './InstrumentModal.vue'
 //props item from SoundGrid.vue
 const props = defineProps({
   item: Object
 })
 
+const route = useRoute()
 
 //open Instrument Modal when grid item is
-let openInstrument = () => {
+let openInstrumentModal = () => {
   console.log('openInstrumentModal')
   //open Instrument Modal
   route.push({ name: 'Instrument' })

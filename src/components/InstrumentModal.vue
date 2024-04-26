@@ -1,27 +1,33 @@
 <script setup>
 import { ref } from 'vue'
+import * as Tone from 'tone'
 
-const open = ref(false)
+const InstrumentSelectOptionList = ref(['piano', 'guitar', 'drum'])
 
+
+//setInstrumentToSoundItem
+const setInstrumentToSoundItem = (instrument) => {
+  console.log('setInstrumentToSoundItem', instrument)
+
+  //item.instrument = instrumen
+}
 
 
 </script>
 
 <template>
-  <Teleport to="body">
-    <div v-if="open" class="modal">
-      <p>Hello from the modal!</p>
-    </div>
-  </Teleport>
+  <div class="flex">
+    <h2>Instrument List</h2>
+    <select class="intrument-select" @change="setInstrumentToSoundItem($event.target.value)">
+      <option v-for="option in InstrumentSelectOptionList" :key="option">{{ option }}</option>
+    </select>
+  </div>
 </template>
 
 <style scoped>
-.modal {
-  position: fixed;
-  z-index: 999;
-  top: 20%;
-  left: 50%;
-  width: 300px;
-  margin-left: -150px;
+.intrument-select {
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 5px;
 }
 </style>

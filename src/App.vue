@@ -3,32 +3,32 @@ import { ref, watch } from 'vue'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-let transitionName = ref("none");
-let isGoBack = false;
+let transitionName = ref('none')
+let isGoingBack = false
 
 const route = useRoute();
 
-window.addEventListener("popstate", () => {
-  // 뒤로가기시
-  console.log("popstate");
-  isGoBack = true;
-});
+window.addEventListener('popstate', () => {
+  isGoingBack = true
+})
+
+
 
 watch(
   () => route.name,
   (to, from) => {
     console.log("watch");
     transitionName.value = "none";
-    if (isGoBack) {
+    if (isGoingBack) {
       // 뒤로 가기 버튼 눌렸을 시 왼쪽에서 덮임
       transitionName.value = "slide-left";
-      isGoBack = false;
+      isGoingBack = false;
     } else {
       if (from === undefined) return; // 새로고침시
       transitionName.value = "slide-right";
     }
   }
-);
+)
 
 
 </script>
@@ -47,7 +47,6 @@ watch(
       </nav>
     </div>
   </header>
-  //transition routerView
 
   <RouterView v-slot="{ Component }">
     <transition :name="transitionName">
@@ -61,6 +60,7 @@ watch(
 header {
   line-height: 1.5;
   max-height: 100vh;
+  z-index: 100;
 }
 
 .logo {
@@ -119,6 +119,7 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
+
 
 /* 슬라이드 START */
 .none-enter-active,
